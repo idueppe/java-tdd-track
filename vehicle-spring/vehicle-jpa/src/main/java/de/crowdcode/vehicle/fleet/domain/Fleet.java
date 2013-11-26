@@ -23,7 +23,7 @@ import de.crowdcode.vehicle.domain.Vehicle;
 		@NamedQuery(name = Fleet.FIND_ALL_COMPANY_NAMES, query = "SELECT f.companyName FROM Fleet f"),
 		@NamedQuery(name = Fleet.ENGINE_REPORT, query = " SELECT "
 				+ " new de.crowdcode.vehicle.fleet.domain.EngineInfo(v.engine.type, COUNT(v)) "
-				+ " FROM Fleet f INNER JOIN f.vehicles AS v" + " WHERE f.companyName = :companyName"
+				+ " FROM Fleet f INNER JOIN f.vehicles AS v" + " WHERE f.companyName = :companyName "
 				+ " GROUP BY v.engine.type")
 
 })

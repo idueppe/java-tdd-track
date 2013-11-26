@@ -7,19 +7,23 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.crowdcode.vehicle.service.VehicleService;
 
-public class ApplicationContextTest {
+public class ApplicationContextTest
+{
 
-    @Test
-    public void test() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml");
-        
-        String[] names = context.getBeanDefinitionNames();
-        for (String name : names) {
-            System.out.println(name);
-        }
-        
-        VehicleService bean = (VehicleService) context.getBean("vehicleServiceBean");
-        assertNotNull(bean);
-    }
+	@Test
+	public void test()
+	{
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml");
+
+		String[] names = context.getBeanDefinitionNames();
+		for (String name : names)
+		{
+			System.out.println(name);
+		}
+
+		VehicleService bean = (VehicleService) context.getBean("vehicleServiceBean");
+		assertNotNull(bean);
+		context.close();
+	}
 
 }

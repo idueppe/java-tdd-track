@@ -1,19 +1,19 @@
 package de.crowdcode.vehicle.fleet.doa.jpa;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.AfterTransaction;
+import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.crowdcode.vehicle.controller.spi.DBFixture;
@@ -41,14 +41,14 @@ public class FleetDaoTest {
     @Autowired
     private DBFixtureUser dbFixtureUser;
     
-    @Before
+    @BeforeTransaction
     public void setUp() {
         dbFixture.createDefaultDataInDatabase();
         dbFixtureFleets.createDefaultDataInDatabase();
         dbFixtureUser.createDefaultDataInDatabase();
     }
     
-    @After
+    @AfterTransaction
     public void tearDown() {
         dbFixtureUser.removeAll();
         dbFixtureFleets.removeAll();
@@ -75,11 +75,22 @@ public class FleetDaoTest {
         List<EngineInfo> report = dao.getEngineReport(DBFixtureFleets.COMPANY_NAME);
         assertNotNull(report);
         assertFalse(report.isEmpty());
+        
         System.out.println(Arrays.toString(report.toArray()));
-        assertEquals(EngineType.PETROL, report.get(0).getEngineType());
-        assertEquals(1L, report.get(0).getQuantity());
-        assertEquals(EngineType.DIESEL, report.get(1).getEngineType());
-        assertEquals(2L, report.get(1).getQuantity());
+        
+        Map<EngineType, Long> map = toMap(report);
+        
+        assertTrue(map.containsKey(EngineType.PETROL));
+        assertEquals(Long.valueOf(1L), map.get(EngineType.PETROL));
+        assertTrue(map.containsKey(EngineType.DIESEL));
+        assertEquals(Long.valueOf(2L), map.get(EngineType.DIESEL));
     }
     
+    private Map<EngineType, Long> toMap(List<EngineInfo> infos)
+    {
+    	Map<EngineType, Long> map = new HashMap<>();
+    	for (EngineInfo info : infos)
+    		map.put(info.getEngineType(), info.getQuantity());
+    	return map;
+    }
 }

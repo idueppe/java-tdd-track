@@ -87,16 +87,23 @@ public class DBFixture {
         return this;
     }
     
-    protected void beginTx() {
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
-    }
-    
-    protected void commitTx() {
-        em.getTransaction().commit();
-        em.close();
-    }
-    
+	protected void beginTx()
+	{
+		em = emf.createEntityManager();
+		if (!em.getTransaction().isActive())
+		{
+			em.getTransaction().begin();
+		}
+	}
+
+	protected void commitTx()
+	{
+		if (em.getTransaction().isActive())
+		{
+			em.getTransaction().commit();
+		}
+		em.close();
+	}
     private DBFixture clear() {
         manufacturers.clear();
         vehicles.clear();

@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.AfterTransaction;
+import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.crowdcode.vehicle.controller.spi.DBFixture;
@@ -36,12 +38,26 @@ public class ManufacturerJpaDaoTest {
     
     @Before
     public void setUp() {
-        dbFixture.createDefaultDataInDatabase();
+    	System.out.println("------- setup ----------");
     }
     
     @After
     public void tearDown() {
-        dbFixture.removeAll();
+    	System.out.println("------- tearDown -------");
+    }
+    
+    @BeforeTransaction
+    public void setupBeforeTransaction()
+    {
+    	System.out.println("------- setup before TX -------");
+    	dbFixture.createDefaultDataInDatabase();
+    }
+    
+    @AfterTransaction
+    public void tearDownAfterTransaction()
+    {
+    	System.out.println("------- tearDown after TX -------");
+    	dbFixture.removeAll();
     }
     
     @Test

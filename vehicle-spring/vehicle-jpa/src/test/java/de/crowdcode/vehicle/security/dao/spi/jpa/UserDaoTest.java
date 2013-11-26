@@ -8,13 +8,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.AfterTransaction;
+import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.crowdcode.vehicle.controller.spi.DBFixture;
@@ -26,6 +26,7 @@ import de.crowdcode.vehicle.security.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/applicationContext.xml"})
+@Transactional
 public class UserDaoTest {
 
     @Autowired
@@ -40,14 +41,14 @@ public class UserDaoTest {
     @Autowired
     private DBFixtureUser dbFixtureUser;
     
-    @Before
+    @BeforeTransaction
     public void setUp() {
         dbFixture.createDefaultDataInDatabase();
         dbFixtureFleets.createDefaultDataInDatabase();
         dbFixtureUser.createDefaultDataInDatabase();
     }
     
-    @After
+    @AfterTransaction
     public void tearDown() {
         dbFixtureUser.removeAll();
         dbFixtureFleets.removeAll();
