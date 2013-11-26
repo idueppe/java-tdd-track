@@ -12,7 +12,6 @@
     <modules>
    		<module>vehicle-api</module>
         <module>vehicle-jsf</module>
-        <module>vehicle-web</module>
         <module>vehicle-jpa</module>
     </modules>
 

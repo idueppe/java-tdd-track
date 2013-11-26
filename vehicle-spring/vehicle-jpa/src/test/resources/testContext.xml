@@ -12,7 +12,7 @@
 
 <!-- 	<context:annotation-config /> -->
 <!-- 	<tx:annotation-driven transaction-manager="transactionManager"/> -->
-<!-- 	<context:component-scan base-package="com.lsy"/> -->
+<!-- 	<context:component-scan base-package="de.crowdcode"/> -->
 	
 <!-- 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/> -->
 
@@ -24,6 +24,6 @@
 <!--     	<property name="persistenceUnitName" value="vehicle-foundation"/> -->
 <!--     </bean> -->
     
-    <bean id="vehicleJpaDao" class="com.lsy.mockup.VehicleDaoMock">
+    <bean id="vehicleJpaDao" class="de.crowdcode.mockup.VehicleDaoMock">
     </bean>
 </beans>

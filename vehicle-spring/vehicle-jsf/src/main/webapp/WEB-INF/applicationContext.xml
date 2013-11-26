@@ -12,7 +12,7 @@
 	<import resource="classpath:applicationContext.xml"/>
 
 	<context:annotation-config/>
-	<context:component-scan base-package="com.lsy.vehicle.ws"/>
+	<context:component-scan base-package="de.crowdcode.vehicle.ws"/>
 	
 	<wss:binding url="/manufacturer">
 		<wss:service>
