@@ -13,6 +13,8 @@
    		<module>vehicle-api</module>
         <module>vehicle-jsf</module>
         <module>vehicle-jpa</module>
+        <module>vehicle-selenium</module>
+        <module>vehicle-fitness</module>
     </modules>
 
 </project>
