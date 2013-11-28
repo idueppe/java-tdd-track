@@ -5,6 +5,7 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.crowdcode.calculator.operators.Noop;
 import de.crowdcode.calculator.operators.Operator;
 import de.crowdcode.calculator.operators.OperatorFactory;
 import de.crowdcode.calculator.operators.OperatorType;
@@ -38,7 +39,12 @@ public class Calculator
 
 		log(nodes, operators);
 
-		return nodes.pop().evaluate();
+		return getRootNode().evaluate();
+	}
+
+	public Node getRootNode()
+	{
+		return (nodes.empty()) ? Noop.insance() : nodes.peek();
 	}
 
 	private void processLeftOperations()
