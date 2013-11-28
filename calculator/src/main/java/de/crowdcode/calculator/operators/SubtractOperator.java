@@ -10,7 +10,7 @@ public class SubtractOperator extends Operator
 		super(left, right);
 	}
 
-	public double evaluate()
+	public Double evaluate()
 	{
 		return left.evaluate() - right.evaluate();
 	}

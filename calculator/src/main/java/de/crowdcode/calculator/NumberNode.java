@@ -2,14 +2,14 @@ package de.crowdcode.calculator;
 
 public class NumberNode implements Node
 {
-	private double value;
+	private Double value;
 
 	public NumberNode(double value)
 	{
 		this.value = value;
 	}
 	
-	public double evaluate()
+	public Double evaluate()
 	{
 		return value;
 	}

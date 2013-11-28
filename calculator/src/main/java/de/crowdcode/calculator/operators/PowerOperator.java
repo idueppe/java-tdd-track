@@ -11,7 +11,7 @@ public class PowerOperator extends Operator
 	}
 
 	@Override
-	public double evaluate()
+	public Double evaluate()
 	{
 		return Math.pow(left.evaluate(), right.evaluate());
 	}

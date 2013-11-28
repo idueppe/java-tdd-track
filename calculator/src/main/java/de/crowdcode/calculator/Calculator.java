@@ -1,6 +1,5 @@
 package de.crowdcode.calculator;
 
-import java.util.Arrays;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +18,7 @@ public class Calculator
 	private Stack<Node> nodes = new Stack<>();
 	private Stack<OperatorType> operators = new Stack<>();
 
-	public double calculate(String term)
+	public Double calculate(String term)
 	{
 		Matcher matcher = REGEX_PATTERN.matcher(term);
 		while (matcher.find())
@@ -38,7 +37,7 @@ public class Calculator
 		processLeftOperations();
 
 		log(nodes, operators);
-
+		
 		return getRootNode().evaluate();
 	}
 
@@ -88,9 +87,9 @@ public class Calculator
 
 	private void log(Stack<Node> nodes, Stack<OperatorType> operators)
 	{
-		System.out.println("Nodes: " + Arrays.toString(nodes.toArray()));
-		System.out.println("Ops  : " + Arrays.toString(operators.toArray()));
-		System.out.println("----");
+//		System.out.println("Nodes: " + Arrays.toString(nodes.toArray()));
+//		System.out.println("Ops  : " + Arrays.toString(operators.toArray()));
+//		System.out.println("----");
 	}
 
 	private void combineOperator(Stack<Node> nodes,
